@@ -15,40 +15,58 @@
         print "<p>O valor recibido do campo nome de usuario é: $nomeUsr</p>";
 
     $contrasinal=htmlspecialchars(trim(strip_tags($_REQUEST['contrasinal'])),ENT_QUOTES, "ISO-8859-1");
-    if ($contrasinal == "")
-        print "<p>O campo nome completo está baleiro.</p>";
-    else
+    if ($contrasinal == "") {
+        print "<p>O campo nome contrasinal está baleiro.</p>";
+    } elseif (strlen($contrasinal) < 6 ) {
+        print '<p style="color:red">O campo nome contrasinal debe ter 6 carácteres ou máis.</p>';
+    } else {
         print "<p>O valor recibido do campo contrasinal é: $contrasinal</p>";
+    };
     
     $idade=htmlspecialchars(trim(strip_tags($_REQUEST['idade'])),ENT_QUOTES, "ISO-8859-1");
-    if ($idade == "")
+    if ($idade == "") {
         print "<p>O campo idade está baleiro.</p>";
-    else
+    } elseif ($idade < 0 || $idade > 130 ) {
+        print '<p style="color:red">O campo nome idade debe ser un número enteiro [0-130].</p>';
+    } else {
         print "<p>O valor recibido do campo idade é: $idade</p>";
+    }
 
     $dNac=htmlspecialchars(trim(strip_tags($_REQUEST['dNac'])),ENT_QUOTES, "ISO-8859-1");
-    if ($dNac == "")
+    if ($dNac == "") {
         print "<p>O campo dNac está baleiro.</p>";
-    else
+    } elseif (!preg_match("~^([0-2][0-9]|3[01])\/(0[0-9]|1[0-2])\/(19[0-9][0-9]|20[0-9][0-9])$~",$dNac)) {
+        print '<p style="color:red">O campo nome data de nacemento debe ter o formato [dd/mm/yyyy] e de rango [01/01/1900-31/12/2099].</p>';
+    } else {
         print "<p>O valor recibido do campo data de nacemento é: $dNac</p>";
-    
+    }
+
     $email=htmlspecialchars(trim(strip_tags($_REQUEST['email'])),ENT_QUOTES, "ISO-8859-1");
-    if ($email == "")
+    if ($email == "") {
         print "<p>O campo email está baleiro.</p>";
-    else
+    } elseif (!filter_var($email,FILTER_VALIDATE_EMAIL)) {
+        print '<p style="color:red">O campo nome email non é valido.</p>';
+    } else {
         print "<p>O valor recibido do campo email é: $email</p>";
+    }
 
     $url=htmlspecialchars(trim(strip_tags($_REQUEST['url'])),ENT_QUOTES, "ISO-8859-1");
-    if ($url == "")
+    if ($url == "") {
         print "<p>O campo URL da páxina persoal está baleiro.</p>";
-    else
+    } elseif (!filter_var($url,FILTER_VALIDATE_URL)) {
+        print '<p style="color:red">O campo nome email non é valido.</p>';
+    } else {
         print "<p>O valor recibido do campo URL da páxina persoal é: $url</p>";
+    }
 
     $ip=htmlspecialchars(trim(strip_tags($_REQUEST['ip'])),ENT_QUOTES, "ISO-8859-1");
-    if ($ip == "")
+    if ($ip == "") {
         print "<p>O campo IP do equipo está baleiro.</p>";
-    else
+    } elseif (!filter_var($ip,FILTER_VALIDATE_IP)) {
+        print '<p style="color:red">O campo nome IP non é valido.</p>';
+    } else {
         print "<p>O valor recibido do campo IP do equipo é: $ip</p>";
+    }
 
     $hobbies=htmlspecialchars(trim(strip_tags($_REQUEST['hobbies'])),ENT_QUOTES, "ISO-8859-1");
     if ($hobbies == "")
