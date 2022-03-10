@@ -26,7 +26,7 @@
     $idade=htmlspecialchars(trim(strip_tags($_REQUEST['idade'])),ENT_QUOTES, "ISO-8859-1");
     if ($idade == "") {
         print "<p>O campo idade está baleiro.</p>";
-    } elseif ($idade < 0 || $idade > 130 ) {
+    } elseif ($idade < 0 || $idade > 130 && filter_var($idade, FILTER_VALIDATE_INT)) {
         print '<p style="color:red">O campo nome idade debe ser un número enteiro [0-130].</p>';
     } else {
         print "<p>O valor recibido do campo idade é: $idade</p>";
